@@ -1,0 +1,34 @@
+❓ Question:
+
+When multiple microservices share a common domain model, sharing it through a common library can lead to tight coupling. 
+To avoid this, follow these best practices:
+
+✅ Answer:
+
+1) Use Bounded Contexts (Domain-Driven Design):
+   Each service should define its own version of the domain model that fits its context.
+   This prevents ripple effects when one service changes its internal logic.
+
+2) Share Contracts, Not Code:
+   Instead of sharing code via libraries, share contracts using OpenAPI/Swagger specifications, JSON Schemas, 
+   or Avro schemas for event-driven systems.
+
+3) Use DTOs for Communication:
+   Services should exchange Data Transfer Objects (DTOs) over APIs or messages, not internal entities.
+   Each service should map incoming DTOs to its internal model.
+
+4) Schema Registry for Events:
+   In event-driven architectures, use a Schema Registry (like Confluent Schema Registry) to version 
+   and validate event, avoiding direct code dependency.
+
+5) Versioning & Backward Compatibility:
+   Design APIs and events to be versioned and backward compatible and versioned so that services evolve independently.
+
+6) Loose Coupling through API Gateways or Message Brokers
+   Let services communicate through well-defined interfaces (REST, GraphQL, Kafka topics, etc.) instead of direct shared libraries.
+
+⚠️ Summary:
+
+Avoid coupling by sharing contracts, not code.
+
+Keep domain models service-specific and communicate via versioned APIs or schema-defined messages.
